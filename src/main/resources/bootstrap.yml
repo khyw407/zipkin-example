@@ -13,7 +13,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka.development.svc.cluster.local:32002/eureka/
+      defaultZone: eureka.192.168.0.9:32002/eureka/
   instance:
     prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 3
