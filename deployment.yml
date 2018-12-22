@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zipkin
+spec:
+  rules:
+  - host: zipkin.192.168.0.9.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zipkin
+          servicePort: 32006
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zipkin
+spec:
+  type: NodePort
+  selector:
+    app: spring-cloud-zipkin
+  ports:
+  - protocol: TCP
+    port: 9411
+    targetPort: 9411
+    nodePort: 32006
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-cloud-zipkin
+  labels:
+    app: spring-cloud-zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-cloud-zipkin
+  template:
+    metadata:
+      labels:
+        app: spring-cloud-zipkin
+        version: latest
+    spec:
+      containers:
+      - name: spring-cloud-zipkin
+        image: 192.168.0.8:5000/zipkin-server:latest
+        ports:
+        - name: http
+          containerPort: 9411
