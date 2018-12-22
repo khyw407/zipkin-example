@@ -41,7 +41,7 @@ dependencies {
 	compile('io.zipkin.java:zipkin-server:2.11.12')
 	compile('io.zipkin.java:zipkin-autoconfigure-ui:2.11.12')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	compile('net.logstash.logback:logstash-logback-encoder:4.11')
+	compile('ch.qos.logback:logback-classic:1.2.3')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
