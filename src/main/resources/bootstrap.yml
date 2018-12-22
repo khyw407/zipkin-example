@@ -1,10 +1,20 @@
+server:
+  port: 9411
+  
 spring:  
   profiles:
     active:
     - dev
   application:
     name: zipkin
-  cloud:
-    config:
-      uri:
-      - http://configuration.development.svc.cluster.local:8888
+      
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka.development.svc.cluster.local:32002/eureka/
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 3
+    leaseExpirationDurationInSeconds: 5
